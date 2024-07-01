@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Trip, TripStatus } from './trip.entity';
 import { Location } from '../locations/location.entity';
-import { Repository, LessThan } from 'typeorm';
+import { Repository, MoreThan } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { SHIP_SPEED_MPH, SpaceShip } from '../space-ships/space-ship.entity';
 import { CancelTripInput, CreateTripInput, GetTripInput } from './types';
@@ -52,7 +52,7 @@ export class TripService {
       where: {
         tripId: input.tripId.toString(),
         tripStatus: TripStatus.SCHEDULED,
-        departureAt: LessThan(new Date()),
+        departureAt: MoreThan(new Date()),
       },
     });
 
